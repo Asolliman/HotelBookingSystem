@@ -1,0 +1,229 @@
+@baseUrl = https://localhost:5001
+@adminEmail = admin@hotel.com
+@adminPassword = Admin123!
+@accessToken = 
+
+### ===============================
+### AUTHENTICATION ENDPOINTS
+### ===============================
+
+### Admin Login - Get JWT Token
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "{{adminEmail}}",
+  "password": "{{adminPassword}}"
+}
+
+###
+
+### Register New Guest User
+POST {{baseUrl}}/api/auth/register
+Content-Type: application/json
+
+{
+  "fullName": "John Doe",
+  "email": "john.doe@example.com",
+  "password": "SecurePass123!"
+}
+
+###
+
+### Refresh Access Token
+POST {{baseUrl}}/api/auth/refresh
+Content-Type: application/json
+
+{
+  "refreshToken": "your-refresh-token-here"
+}
+
+###
+
+### ===============================
+### ROOM TYPE ENDPOINTS (Admin Only)
+### ===============================
+
+### Get All Room Types
+GET {{baseUrl}}/api/roomtypes
+Authorization: Bearer {{accessToken}}
+
+###
+
+### Create Room Type
+POST {{baseUrl}}/api/roomtypes
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{
+  "name": "Deluxe Suite",
+  "description": "Luxury room with ocean view and private balcony"
+}
+
+###
+
+### Get Room Type by ID
+GET {{baseUrl}}/api/roomtypes/1
+Authorization: Bearer {{accessToken}}
+
+###
+
+### Update Room Type
+PUT {{baseUrl}}/api/roomtypes/1
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{
+  "name": "Deluxe Suite",
+  "description": "Updated luxury room description"
+}
+
+###
+
+### Delete Room Type
+DELETE {{baseUrl}}/api/roomtypes/1
+Authorization: Bearer {{accessToken}}
+
+###
+
+### ===============================
+### ROOM ENDPOINTS (Admin Only)
+### ===============================
+
+### Get All Rooms
+GET {{baseUrl}}/api/rooms
+Authorization: Bearer {{accessToken}}
+
+###
+
+### Create Room
+POST {{baseUrl}}/api/rooms
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{
+  "roomNumber": "101",
+  "floor": 1,
+  "pricePerNight": "150.00",
+  "roomTypeId": 1
+}
+
+###
+
+### Get Room by ID
+GET {{baseUrl}}/api/rooms/1
+Authorization: Bearer {{accessToken}}
+
+###
+
+### Update Room
+PUT {{baseUrl}}/api/rooms/1
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{
+  "roomNumber": "101",
+  "floor": 1,
+  "pricePerNight": "160.00",
+  "roomTypeId": 1
+}
+
+###
+
+### Delete Room
+DELETE {{baseUrl}}/api/rooms/1
+Authorization: Bearer {{accessToken}}
+
+###
+
+### ===============================
+### RESERVATION ENDPOINTS
+### ===============================
+
+### Get All Reservations (Admin/Receptionist)
+GET {{baseUrl}}/api/reservations
+Authorization: Bearer {{accessToken}}
+
+###
+
+### Get Own Reservations (Guest)
+GET {{baseUrl}}/api/reservations/my
+Authorization: Bearer {{accessToken}}
+
+###
+
+### Get Reservation by ID
+GET {{baseUrl}}/api/reservations/1
+Authorization: Bearer {{accessToken}}
+
+###
+
+### Create Reservation (Guest)
+POST {{baseUrl}}/api/reservations
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{
+  "roomId": 1,
+  "checkInDate": "2024-12-20",
+  "checkOutDate": "2024-12-23"
+}
+
+###
+
+### Update Reservation (Admin/Receptionist)
+PUT {{baseUrl}}/api/reservations/1
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{
+  "status": "Confirmed",
+  "isPaid": true
+}
+
+###
+
+### Cancel Reservation (Admin/Receptionist)
+DELETE {{baseUrl}}/api/reservations/1
+Authorization: Bearer {{accessToken}}
+
+###
+
+### ===============================
+### GUEST PROFILE ENDPOINTS
+### ===============================
+
+### Get Own Profile (Guest)
+GET {{baseUrl}}/api/guestprofiles/me
+Authorization: Bearer {{accessToken}}
+
+###
+
+### Get Profile by ID (Admin/Receptionist)
+GET {{baseUrl}}/api/guestprofiles/1
+Authorization: Bearer {{accessToken}}
+
+###
+
+### Create/Update Guest Profile (Guest)
+POST {{baseUrl}}/api/guestprofiles
+Authorization: Bearer {{accessToken}}
+Content-Type: application/json
+
+{
+  "phoneNumber": "+1-555-0123",
+  "address": "123 Main St, New York, NY 10001",
+  "nationalId": "123-45-6789"
+}
+
+###
+
+### ===============================
+### HANGFIRE DASHBOARD
+### ===============================
+
+### Access Hangfire Dashboard (Admin only, requires browser)
+GET {{baseUrl}}/hangfire
+Authorization: Bearer {{accessToken}}
+
+###
